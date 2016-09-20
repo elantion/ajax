@@ -50,7 +50,7 @@ module.exports = {
         req.addEventListener('load', function () {
             var res;
             var contentType = req.getResponseHeader('Content-Type');
-            if(/application\/json/.test(contentType)){
+            if(/application\/json|text\/json/.test(contentType)){
                 res = JSON.parse(req.responseText);
                 option.resolve(res);
                 return;
