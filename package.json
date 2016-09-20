@@ -1,0 +1,23 @@
+{
+  "name": "ajax",
+  "version": "1.0.0",
+  "description": "ajax",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elantion/ajax.git"
+  },
+  "author": "JamesYin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elantion/ajax/issues"
+  },
+  "homepage": "https://github.com/elantion/ajax#readme",
+  "dependencies": {
+    "is-empty-object": "github:handyjs/isEmptyObject",
+    "type-of": "github:handyjs/typeOf"
+  }
+}
