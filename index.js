@@ -48,7 +48,15 @@ module.exports = {
         }
         req.open(option.method, option.url);
         req.addEventListener('load', function () {
-            console.log(req);
+            var res;
+            var contentType = req.getResponseHeader('Content-Type');
+            if(/application\/json/.test(contentType)){
+                res = JSON.parse(req.responseText);
+                option.resolve(res);
+                return;
+            }
+            res = req.responseText;
+            option.resolve(res);
         });
         req.send();
     },
@@ -63,4 +71,4 @@ module.exports = {
             });
         })
     }
-}
+};
