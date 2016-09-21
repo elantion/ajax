@@ -30,7 +30,7 @@ module.exports = {
                 var query = [];
                 for(let key in option.data){
                     if(option.data.hasOwnProperty(key)){
-                        query.push(key + '=' + encodeURIComponent(option.data[key]));
+                        query.push(key + '=' + (option.data[key]?encodeURIComponent(option.data[key]):''));
                     }
                 }
                 query = query.join('&');
