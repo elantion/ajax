@@ -34,7 +34,7 @@ module.exports = {
                         if(val === null || val === undefined){
                             val = '';
                         }
-                        query.push(key + '=' + encodeURIComponent(option.data[key]));
+                        query.push(key + '=' + encodeURIComponent(val));
                     }
                 }
                 query = query.join('&');
