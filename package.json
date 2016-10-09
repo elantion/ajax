@@ -1,5 +1,5 @@
 {
-  "name": "ajax",
+  "name": "lc-ajax",
   "version": "1.0.0",
   "description": "ajax",
   "main": "index.js",
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/elantion/ajax#readme",
   "dependencies": {
-    "is-empty-object": "github:handyjs/isEmptyObject",
-    "type-of": "github:handyjs/typeOf"
+    "handy-is-empty-object": "^1.0.0",
+    "handy-type-of": "^1.0.0"
   }
 }
