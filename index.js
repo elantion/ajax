@@ -1,5 +1,5 @@
-var typeOf = require('type-of');
-var isEmptyObject = require('is-empty-object');
+var typeOf = require('handy-type-of');
+var isEmptyObject = require('handy-is-empty-object');
 
 module.exports = {
     request: function(option){
