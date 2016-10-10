@@ -28,7 +28,7 @@ module.exports = {
                     return;
                 }
                 var query = [];
-                for(let key in option.data){
+                for(var key in option.data){
                     if(option.data.hasOwnProperty(key)){
                         var val = option.data[key];
                         if(val === null || val === undefined){
