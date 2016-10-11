@@ -51,9 +51,9 @@ module.exports = {
         }
         if(option.method === 'POST'){
             var formData = new FormData();
-            for(let key in data){
-                if(data.hasOwnProperty(key)){
-                    formData.append(key, data[key]);
+            for(let key in option.data){
+                if(option.data.hasOwnProperty(key)){
+                    formData.append(key, option.data[key]);
                 }
             }
         }
