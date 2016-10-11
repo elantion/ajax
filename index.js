@@ -3,7 +3,6 @@ var isEmptyObject = require('handy-is-empty-object');
 
 module.exports = {
     request: function(option){
-        var self = this;
         var req = new XMLHttpRequest();
         //request method
         if(!option.method){
@@ -28,7 +27,7 @@ module.exports = {
                     return;
                 }
                 var query = [];
-                for(var key in option.data){
+                for(let key in option.data){
                     if(option.data.hasOwnProperty(key)){
                         var val = option.data[key];
                         if(val === null || val === undefined){
@@ -50,6 +49,14 @@ module.exports = {
                 }
             }
         }
+        if(option.method === 'POST'){
+            var formData = new FormData();
+            for(let key in data){
+                if(data.hasOwnProperty(key)){
+                    formData.append(key, data[key]);
+                }
+            }
+        }
         req.open(option.method, option.url);
         req.addEventListener('load', function () {
             var res;
@@ -62,7 +69,12 @@ module.exports = {
             res = req.responseText;
             option.resolve(res);
         });
-        req.send();
+        if(option.method === 'POST'){
+            req.send(formData);
+        }
+        if(option.method === 'GET'){
+            req.send();
+        }
     },
     get: function(url, data){
         var self = this;
@@ -74,5 +86,16 @@ module.exports = {
                 resolve: resolve
             });
         })
+    },
+    post: function (url, data) {
+        var self = this;
+        return new Promise(function (resolve) {
+            self.request({
+                method: 'POST',
+                url: url,
+                data: data,
+                resolve: resolve
+            });
+        });
     }
 };
