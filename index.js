@@ -10,6 +10,9 @@ module.exports = {
             option.resolve(false);
             return;
         }
+        if(option.enctype){
+            option.enctype = option.enctype.toUpperCase();
+        }
         option.method = option.method.toUpperCase();
         //request url
         if(option.method === 'GET'){
@@ -50,14 +53,23 @@ module.exports = {
             }
         }
         if(option.method === 'POST'){
-            var formData = new FormData();
-            for(let key in option.data){
-                if(option.data.hasOwnProperty(key)){
-                    formData.append(key, option.data[key]);
+            option.enctype = option.enctype || 'JSON';
+            var sendData;
+            if(option.enctype === 'FORMDATA'){
+                sendData = new FormData();
+                for(let key in option.data){
+                    if(option.data.hasOwnProperty(key)){
+                        sendData.append(key, option.data[key]);
+                    }
                 }
+            }
+            if(option.enctype === 'JSON'){
+                console.log(option.data);
+                sendData = JSON.stringify(option.data);
             }
         }
         req.open(option.method, option.url);
+
         req.addEventListener('load', function () {
             var res;
             var contentType = req.getResponseHeader('Content-Type');
@@ -69,31 +81,43 @@ module.exports = {
             res = req.responseText;
             option.resolve(res);
         });
+        //set headers must be after xhr.open and before xhr.send
+        for(let key in option.headers){
+            if(option.headers.hasOwnProperty(key)){
+                req.setRequestHeader(key, option.headers[key]);
+            }
+        }
+        if(option.enctype === 'JSON'){
+            req.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        }
         if(option.method === 'POST'){
-            req.send(formData);
+            req.send(sendData);
         }
         if(option.method === 'GET'){
             req.send();
         }
     },
-    get: function(url, data){
+    get: function(url, data, headers){
         var self = this;
         return new Promise(function (resolve) {
             self.request({
                 method: 'GET',
                 url: url,
                 data: data,
+                headers: headers,
                 resolve: resolve
             });
         })
     },
-    post: function (url, data) {
+    post: function (url, data, headers, enctype) {
         var self = this;
         return new Promise(function (resolve) {
             self.request({
                 method: 'POST',
                 url: url,
                 data: data,
+                headers: headers,
+                enctype: enctype,
                 resolve: resolve
             });
         });
