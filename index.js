@@ -64,7 +64,6 @@ module.exports = {
                 }
             }
             if(option.enctype === 'JSON'){
-                console.log(option.data);
                 sendData = JSON.stringify(option.data);
             }
         }
