@@ -1,6 +1,6 @@
+'use strict';
 var typeOf = require('handy-type-of');
 var isEmptyObject = require('handy-is-empty-object');
-
 module.exports = {
     request: function(option){
         var req = new XMLHttpRequest();
