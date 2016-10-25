@@ -30,7 +30,7 @@ module.exports = {
                     return;
                 }
                 var query = [];
-                for(let key in option.data){
+                for(var key in option.data){
                     if(option.data.hasOwnProperty(key)){
                         var val = option.data[key];
                         if(val === null || val === undefined){
@@ -57,9 +57,9 @@ module.exports = {
             var sendData;
             if(option.enctype === 'FORMDATA'){
                 sendData = new FormData();
-                for(let key in option.data){
-                    if(option.data.hasOwnProperty(key)){
-                        sendData.append(key, option.data[key]);
+                for(var key1 in option.data){
+                    if(option.data.hasOwnProperty(key1)){
+                        sendData.append(key1, option.data[key1]);
                     }
                 }
             }
@@ -81,9 +81,9 @@ module.exports = {
             option.resolve(res);
         });
         //set headers must be after xhr.open and before xhr.send
-        for(let key in option.headers){
-            if(option.headers.hasOwnProperty(key)){
-                req.setRequestHeader(key, option.headers[key]);
+        for(var key2 in option.headers){
+            if(option.headers.hasOwnProperty(key2)){
+                req.setRequestHeader(key2, option.headers[key2]);
             }
         }
         if(option.enctype === 'JSON'){
