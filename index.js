@@ -68,7 +68,7 @@ module.exports = {
             }
         }
         req.open(option.method, option.url);
-
+        
         req.addEventListener('load', function () {
             var res;
             var contentType = req.getResponseHeader('Content-Type');
@@ -79,6 +79,9 @@ module.exports = {
             }
             res = req.responseText;
             option.resolve(res);
+        });
+        req.addEventListener('error', function() {
+            return option.reject ? option.reject() : false;
         });
         //set headers must be after xhr.open and before xhr.send
         for(var key2 in option.headers){
@@ -98,26 +101,28 @@ module.exports = {
     },
     get: function(url, data, headers){
         var self = this;
-        return new Promise(function (resolve) {
+        return new Promise(function (resolve, reject) {
             self.request({
                 method: 'GET',
                 url: url,
                 data: data,
                 headers: headers,
-                resolve: resolve
+                resolve: resolve,
+                reject: reject
             });
         })
     },
     post: function (url, data, headers, enctype) {
         var self = this;
-        return new Promise(function (resolve) {
+        return new Promise(function (resolve, reject) {
             self.request({
                 method: 'POST',
                 url: url,
                 data: data,
                 headers: headers,
                 enctype: enctype,
-                resolve: resolve
+                resolve: resolve,
+                reject: reject
             });
         });
     }
