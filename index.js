@@ -1,7 +1,7 @@
 'use strict';
-var typeOf = require('handy-type-of');
-var isEmptyObject = require('handy-is-empty-object');
-module.exports = {
+var typeOf = require('lc-type-of');
+var isEmptyObject = require('lc-is-empty-object');
+var ajax = {
     request: function(option){
         var req = new XMLHttpRequest();
         //request method
@@ -127,3 +127,4 @@ module.exports = {
         });
     }
 };
+module.exports = ajax;
