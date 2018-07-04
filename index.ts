@@ -51,7 +51,14 @@ class Ajax {
                     let arr = [];
                     for(let key in args.data){
                         if(args.data.hasOwnProperty(key)){
-                            arr.push(key + '=' + encodeURIComponent(args.data[key]));
+                            const val = args.data[key];
+                            if(!val){
+                                arr.push(key + '=');
+                            }else if(typeof val === 'object'){
+                                arr.push(key + '=' + encodeURIComponent(JSON.stringify(args.data[key])));
+                            }else{
+                                arr.push(key + '=' + encodeURIComponent(args.data[key]));
+                            }
                         }
                     }
                     args.data = arr.join('&');

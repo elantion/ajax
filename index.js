@@ -1,5 +1,5 @@
 "use strict";
-var Ajax = (function () {
+var Ajax = /** @class */ (function () {
     function Ajax() {
         //god know what I written.
     }
@@ -54,7 +54,16 @@ var Ajax = (function () {
                     var arr = [];
                     for (var key in args.data) {
                         if (args.data.hasOwnProperty(key)) {
-                            arr.push(key + '=' + encodeURIComponent(args.data[key]));
+                            var val = args.data[key];
+                            if (!val) {
+                                arr.push(key + '=');
+                            }
+                            else if (typeof val === 'object') {
+                                arr.push(key + '=' + encodeURIComponent(JSON.stringify(args.data[key])));
+                            }
+                            else {
+                                arr.push(key + '=' + encodeURIComponent(args.data[key]));
+                            }
                         }
                     }
                     args.data = arr.join('&');
