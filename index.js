@@ -40,11 +40,15 @@ var Ajax = /** @class */ (function () {
             else if (args.method === 'POST') {
                 args.enctype = args.enctype || 'URLENCODED'; //using urlencoded as default
                 if (args.enctype === 'FORMDATA') {
-                    args.data = new FormData();
-                    for (var key1 in args.data) {
-                        if (args.data.hasOwnProperty(key1)) {
-                            args.data.append(key1, args.data[key1]);
-                        }
+                    if (args.data instanceof FormData) {
+                        // No need to transfer it.
+                    }
+                    else {
+                        var formData_1 = new FormData();
+                        Object.keys(args.data).forEach(function (key) {
+                            formData_1.append(key, args.data[key]);
+                        });
+                        args.data = formData_1;
                     }
                 }
                 else if (args.enctype === 'JSON') {

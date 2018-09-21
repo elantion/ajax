@@ -1,6 +1,6 @@
 {
   "name": "lc-ajax",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "ajax",
   "main": "index.js",
   "typings": "index",

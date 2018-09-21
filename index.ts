@@ -4,7 +4,7 @@ class Ajax {
     constructor(){
         //god know what I written.
     }
-    public static request(args:ARGUMENTS) {
+    public static request(args:ARGUMENTS):Promise<any>{
         return new Promise(function (resolve:(res:any, xhr?:XMLHttpRequest)=>void, reject:(error:string, xhr?:XMLHttpRequest)=>void) {
             if(args.enctype){
                 args.enctype = args.enctype.toUpperCase();
@@ -39,11 +39,14 @@ class Ajax {
             }else if(args.method === 'POST'){
                 args.enctype = args.enctype || 'URLENCODED'; //using urlencoded as default
                 if(args.enctype === 'FORMDATA'){
-                    args.data = new FormData();
-                    for(let key1 in args.data){
-                        if(args.data.hasOwnProperty(key1)){
-                            args.data.append(key1, args.data[key1]);
-                        }
+                    if(args.data instanceof FormData){
+                        // No need to transfer it.
+                    }else{
+                        const formData = new FormData();
+                        Object.keys(args.data).forEach(key=>{
+                            formData.append(key, args.data[key]);
+                        });
+                        args.data = formData;
                     }
                 }else if(args.enctype === 'JSON'){
                     args.data = JSON.stringify(args.data);
