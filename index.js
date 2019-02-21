@@ -83,7 +83,7 @@ var Ajax = /** @class */ (function () {
             xhr.open(args.method, args.url, args.isAsync);
             xhr.addEventListener('load', function () {
                 if (xhr.status === 200) {
-                    var contentType = xhr.getResponseHeader('Content-Type');
+                    var contentType = xhr.getResponseHeader('Content-Type') || '';
                     if (/application\/json|text\/json/.test(contentType)) {
                         resolve(JSON.parse(xhr.responseText), xhr);
                     }
@@ -95,10 +95,8 @@ var Ajax = /** @class */ (function () {
                     reject('server_error', xhr);
                 }
             });
-            if (args.progressFn) {
-                xhr.addEventListener('progress', function () {
-                    args.progressFn(xhr);
-                });
+            if (typeof args.progressFn === 'function') {
+                xhr.addEventListener('progress', args.progressFn);
             }
             xhr.addEventListener('error', function () {
                 reject('network_error', xhr);

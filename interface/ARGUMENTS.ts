@@ -4,6 +4,6 @@ interface ARGUMENTS {method: string;
     data?:any;
     isAsync?:boolean;
     headers?:any;
-    progressFn?:(xhr:XMLHttpRequest)=>void;
+    progressFn?:EventListenerOrEventListenerObject;
 }
 export default ARGUMENTS;
