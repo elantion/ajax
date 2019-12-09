@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Ajax = /** @class */ (function () {
     function Ajax() {
         //god know what I written.
@@ -135,4 +136,4 @@ var Ajax = /** @class */ (function () {
     };
     return Ajax;
 }());
-module.exports = Ajax;
+exports.default = Ajax;

@@ -1,6 +1,6 @@
 {
   "name": "lc-ajax",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "ajax",
   "main": "index.js",
   "typings": "index",
@@ -23,7 +23,7 @@
     "registry": "http://registry.npmjs.org"
   },
   "devDependencies": {
-    "mocha": "^6.0.0",
-    "typescript": "^3.3.3"
+    "mocha": "^6.2.2",
+    "typescript": "^3.6.4"
   }
 }

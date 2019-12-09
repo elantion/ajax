@@ -5,4 +5,4 @@ declare class Ajax {
     static get(url: string, data?: any, headers?: any): Promise<any>;
     static post(url: string, data?: any, headers?: any, enctype?: string): Promise<any>;
 }
-export = Ajax;
+export default Ajax;
