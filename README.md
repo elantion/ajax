@@ -1,3 +1,4 @@
+[deprecated]: AJAX is so simple, you don't need a module to help you at all.
 # ajax
 A XMLHttpRequest 2 module
 
